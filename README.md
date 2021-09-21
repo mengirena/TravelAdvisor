@@ -1,70 +1,116 @@
-# Getting Started with Create React App
+# Pricing component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8dd3688a-8f84-4c53-8702-a2cd7fcbe574/deploy-status)]()
 
-## Available Scripts
+👆🏽 click to check the live page
 
-In the project directory, you can run:
 
-### `npm start`
+## Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## How it's built
+**Tech used:** ReactJS, Rapid API, Google map, Material UI
 
-### `npm test`
+## Lesson learned
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Install the dependency
 
-### `npm run build`
+```
+npm install @material-ui/core @material-ui/icons @material-ui/lab @react-google-maps/api axios google-map-react
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### How do we use transition
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`transition` can let us decide which property to animate, when the animation should start and how long and how the animation will be. But not all properties can be transitioned. Here are the [properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties) can be transitioned. 
+We can control the transition by the sub-properties (with default):
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `transition-property: all`
 
-### `npm run eject`
+- `transition-duration: 0s`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- `transition-timing-function: ease`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `transition-delay: 0s`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 3D CSS properties used 
 
-## Learn More
+Use `transform-style: preserve-3D` can preserve element's 3D position
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+If a `transform` property has a value other than its initial value, a stacking context will be created. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`transform` can let us do:
 
-### Code Splitting
+- Matrix transformation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Perspective (3D feeling)
+    `perspective`: determine the distance between the z = 0 and the user. Default value is `none`. Giving a `length` value can appply a perspective transform to the element and the content. 
 
-### Analyzing the Bundle Size
+- Rotation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    - `rotateX(angle)`
 
-### Making a Progressive Web App
+    - `rotateY(angle)`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    - `rotateZ(angle)`
 
-### Advanced Configuration
+    - `rotate3d(x,y,z,angle)`
+    
+    `backgace-visibility` is often used with `transform: rotateY(180deg);` and this can make the back of the element be visible or hidden.  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Scaling (Resizing)
 
-### Deployment
+    - `scaleX(number)`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    - `scaleY(number)`
 
-### `npm run build` fails to minify
+- Skewing (distortion)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Translation (moving)
+
+    - `translateX(length-percentage)`
+
+    - `translateY(length-percentage)`
+
+    - `translate(length-percentage, length-percentage?)`
+
+    - `translate3d(length-percentage, length-percentage, length)`
+
+    - `translateZ(length)`
+
+The stacking context is the concept of making elements to have z-axis degree of freedom. Some elements have special properties to form a stacking context. Some scenarios are:
+
+ - With `transform`, `filter`, `perspective`, `clip-path`, `mask` / `mask-image` / `mask-border` properties and their values are not none.
+
+ - With `position` value `absolute` or `relative` and `z-index` is not auto or with value `fixed` or `sticky`
+
+ - A child of flex or grid container and the z-index is not auto
+
+ [other scenarios...](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context#the_stacking_context)
+ 
+The rendering order starting from the root elements in the same stacking context with lower z-index being rendered first. The z-index is independent from different stacking contexts. 
+
+Using z-index can create customized stacking order, when the z-index is not specified the rendering order will follow:
+
+1. The background and borders of the root elements
+
+2. Non-positioned blocks
+
+3. Positioned elements 
+
+### Get the first child from NodeList
+
+Use `firstElementChild`
+
+To add class to the nodeList, use `classList.add(className)`. On the contrary, if we were to remove a classslist, use `classList.remove("className")`. 
+
+The event type "mouseleave" is differernt from "mouseout". "mouseout" will trigger bubble effect.  
+
+### How do we make slide button
+### How do we make fluid font size
+
+We can use `vh` or `vw` lenght unit. 
+
+
+Reference
+<a href='https://www.freepik.com/photos/dog'>Dog photo created by freepik - www.freepik.com</a>

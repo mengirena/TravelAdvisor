@@ -66,4 +66,19 @@ import GoogleMapReact from 'google-map-react'
 
 ### Material UI + styled component
 
+### Optional chaining
 
+`?.` it can be used to read the value of a property without requiring to check the existence of this property. When the property doesn't exist, it will return `undefined`.
+
+```js
+    const adventurer = {
+    name: 'Alice',
+    cat: {
+        name: 'Dinah'
+    }
+    };
+
+    const dogName = adventurer.dog?.name;
+    console.log(dogName);
+    // expected output: undefined
+```

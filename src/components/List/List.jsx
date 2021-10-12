@@ -22,7 +22,10 @@ const List = () => {
         {name: 'Best Steak'},
     ]
 
+    places?.map((place, i)=>console.log(place))
+
     return (
+        
         <div className={classes.container}>
             <Typography variant="h4">Restaurants, Hotels & Attractions around you</Typography>
             <FormControl className={classes.formControl}>
@@ -42,12 +45,12 @@ const List = () => {
                     <MenuItem value={4.5}>Avobe 4.5</MenuItem>
                 </Select>
             </FormControl>
-            <Grid container spacing={3} className="classes.list">
-                {places?.map((place, i)=>{
+            <Grid container spacing={3} className={classes.list}>
+                {places?.map((place, i)=>(
                     <Grid item key={i} xs={12}>
                         <PlaceDetails place={place}/>
                     </Grid>
-                })}
+                ))}
             </Grid>
         </div>
     )

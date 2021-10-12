@@ -22,8 +22,6 @@ const List = () => {
         {name: 'Best Steak'},
     ]
 
-    places?.map((place, i)=>console.log(place))
-
     return (
         
         <div className={classes.container}>

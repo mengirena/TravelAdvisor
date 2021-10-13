@@ -1,6 +1,7 @@
 import React from 'react'
 import { CssBaseline, Grid } from '@material-ui/core' //For creating layout, CssBaline: normalize style
 
+import { getPlacesData } from './api'
 import Header from './components/Header/Header'
 import List from './components/List/List'
 import Map from './components/Map/Map'

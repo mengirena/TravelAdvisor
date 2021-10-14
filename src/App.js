@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { CssBaseline, Grid } from '@material-ui/core' //For creating layout, CssBaline: normalize style
 
 import { getPlacesData } from './api'
@@ -7,6 +7,17 @@ import List from './components/List/List'
 import Map from './components/Map/Map'
 
 const App = () => {
+    const [places, setPlaces] = useState([])
+
+    useEffect(() => {
+        getPlacesData()
+            .then((data) => {
+                console.log(data)
+
+                setPlaces(data)
+            })
+    }, [])
+
     return (
         <>
             <CssBaseline />

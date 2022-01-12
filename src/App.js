@@ -9,6 +9,9 @@ import Map from './components/Map/Map'
 const App = () => {
     const [places, setPlaces] = useState([])
 
+    const [coordinates, setCordinates] = useState({})
+    const [bounds, setBoundss] = useState(null)
+
     useEffect(() => {
         getPlacesData()
             .then((data) => {
@@ -27,7 +30,11 @@ const App = () => {
                     <List />
                 </Grid>
                 <Grid item xs={12} md={8}>
-                    <Map />
+                    <Map
+                        setCoordinates={setCoordinates} 
+                        setBounds={setBounds}
+                        coordinates={coordinates}
+                    />
                 </Grid>
             </Grid>
             
